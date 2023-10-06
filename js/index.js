@@ -55,12 +55,13 @@ function handlingResponse(users) {
         .then(res => res.json())
         .then(repos => {
           //iterating over each repo in repos
+          document.querySelector('ul#repos-list').innerHTML=""
           repos.forEach(element => {
-            const repoNames = element.name;
-            const rList = document.createElement('li');
-            rList.innerText = repoNames;
+            console.log(element)
+            const repoName = element.name;
+            
             //appending rList to the dom
-            document.querySelector('ul#repos-list').appendChild(rList);
+            document.querySelector('ul#repos-list').innerHTML+=`<li>${repoName}</li>`
           });
         });
     });
