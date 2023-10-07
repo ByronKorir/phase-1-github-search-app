@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded',()=>{
    // preventing the form from reloading when submitted
    //prevent submission of an empty form
     e.preventDefault();
+    
     //selecting the input value which is the user name
     let userInput = document.querySelector('input#search').value;
    // console.log(userInput)
@@ -16,6 +17,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       .then((res) => res.json())
       //handling response
       .then((users) => {
+        
         handlingResponse(users);
           
         }); 
@@ -29,17 +31,19 @@ document.addEventListener('DOMContentLoaded',()=>{
 // A function to handle response
 
 function handlingResponse(users) {
-  //getting the number of total count and appending it to the dom
-  const match = users.total_count;
-  const h4 = document.createElement('h4');
-  h4.innerHTML = `<h4>Total count: ${match}</h4>`;
-  document.querySelector('#github-container').appendChild(h4);
-
+ 
   const items = users.items;
   items.forEach(item => {
-    const ul = document.querySelector('ul#user-list');
+    
+    const ul = document.querySelector('ul#user-list');    
+     //getting the number of total count and appending it to the dom
+  //   const match = users.total_count;
+  // const h4 = document.createElement('h4');
+  // h4.innerHTML = `<h4>Total count: ${match}</h4>`;
+  // document.querySelector('#github-container').appendChild(h4);
     const li = document.createElement('li');
     //adding elements to li
+    ul.innerHTML=""
     li.innerHTML = `
       <p>Username: ${item.login}</p>
       <img src="${item.avatar_url}"><br>
@@ -58,10 +62,10 @@ function handlingResponse(users) {
           document.querySelector('ul#repos-list').innerHTML=""
           repos.forEach(element => {
             console.log(element)
-            const repoName = element.name;
+            const repoNames = element.name;
             
             //appending rList to the dom
-            document.querySelector('ul#repos-list').innerHTML+=`<li>${repoName}</li>`
+            document.querySelector('ul#repos-list').innerHTML+=`<li>${repoNames}</li>`
           });
         });
     });
